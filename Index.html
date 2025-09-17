@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sanjaykumar B. Gohil</title>
+
+<style>
+:root{
+  --accent1: #00c6ff;
+  --accent2: #9333ea;
+  --bg1: #0f172a;
+  --bg2: #1e293b;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  color: #fff;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  padding-top:52vh;  /* Cover ke niche About section */
+}
+
+/* COVER */
+.cover{
+  position:fixed;
+  top:0;
+  left:8%;
+  right:8%;
+  height:50vh;
+  min-height:360px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  padding:20px 5%;
+  overflow:hidden;
+  z-index:1000;
+  background:#0f172a;
+  border-radius:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.6);
+}
+.cover > img.bg {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:1;
+  z-index:0;
+  border-radius:18px;
+}
+
+/* Fade effect below cover */
+.cover::after {
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-40px;
+  height:60px;
+  background: linear-gradient(to bottom, rgba(15,23,42,1), rgba(15,23,42,0));
+  border-radius:0 0 18px 18px;
+  z-index:2;
+  pointer-events:none;
+}
+
+/* Top Menu */
+.top-menu{
+  position:absolute;
+  top:15px;
+  right:20px;
+  display:flex;
+  gap:12px;
+  z-index:4;
+  font-size:14px;
+}
+.top-menu a{ color:#fff; font-weight:600; text-decoration:none; transition:0.2s;}
+.top-menu a:hover{ color:var(--accent1); }
+.divider { color:#888; }
+
+/* HERO */
+.hero{
+  position:relative;
+  z-index:2;
+  display:flex;
+  gap:24px;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top:50px; /* menu ke niche space */
+}
+
+/* Profile (Pic + Info) */
+.hero-left{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  gap:20px;
+  position:relative;
+}
+
+/* Avatar without border, moon-like glow using ::before */
+.avatar{
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  overflow:hidden;
+  display:block;
+  position:relative;
+  background: #000;
+}
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:50%;
+  position:relative;
+  z-index:2;
+}
+
+/* moon-like glow behind avatar */
+.avatar::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  z-index:1;
+  /* pale warm center, bluish outer - gives moon + halo effect */
+  background: radial-gradient(circle at 35% 30%,
+    rgba(255,244,200,0.95) 0%,
+    rgba(255,244,200,0.55) 12%,
+    rgba(0,198,255,0.12) 40%,
+    rgba(0,198,255,0.06) 55%,
+    rgba(0,0,0,0) 70%);
+  filter: blur(14px);
+  pointer-events:none;
+}
+
+/* Name & Designation */
+.profile-info{
+  text-align:left;
+}
+.profile-info h1.name {
+  font-family: Calibri, Charcoal, sans-serif;
+  font-size: 28px;
+  margin:0 0 6px;
+  font-weight:700;
+  background: linear-gradient(90deg, #fff, #00c6ff);
+  background-size:300% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  display:inline-block;
+  animation: gradientFlow 6s linear infinite;
+}
+@keyframes gradientFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.profile-info p{
+  margin:0;
+  font-size:14px;
+  font-weight:600;
+  color:#fff;
+  text-shadow: 0 0 6px rgba(255,255,255,0.12);
+}
+
+/* TAGLINE (Zoom + Blink) positioned just below menu */
+.hero-tagline{
+  position:absolute;
+  top:55px;   /* menu ke bilkul niche */
+  left:50%;
+  transform:translateX(-50%);
+  z-index:3;
+  text-align:center;
+}
+.hero-tagline .tagline-text{
+  font-size:20px;
+  font-weight:700;
+  font-family: "Cambria", cursive;
+  color:white;
+  animation: zoomBlink 2s infinite;
+}
+@keyframes zoomBlink {
+  0%,100% { transform:scale(1); opacity:1; }
+  50%     { transform:scale(1.15); opacity:0.45; }
+}
+
+/* Glassmorphism Section (About Me) */
+.glass-card{
+  margin:0 auto 40px;
+  width:84%;
+  background: rgba(0,198,255,0.08);
+  border:1px solid rgba(0,198,255,0.18);
+  backdrop-filter: blur(12px);
+  border-radius:16px;
+  padding:28px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45);
+}
+
+/* About content and header */
+.about-content{
+  color:#e0f7ff;
+  line-height:1.8;
+  text-align:justify;
+  font-size:17px;
+  min-height:220px;
+  white-space:normal;
+  font-family: Calibri, sans-serif;
+}
+.about-content .about-header{
+  color: var(--accent1);
+  font-size: 34px;      /* larger header as requested */
+  font-weight: 800;
+  margin-bottom: 14px;
+  display:block;
+  text-align:left;
+  letter-spacing:0.2px;
+}
+/* paragraphs */
+.about-paragraph{
+  margin-bottom:12px;
+  font-size:17px;
+  text-align:justify;
+}
+
+/* Footer */
+footer{ text-align:center; padding:20px; color:#94a3b8; font-size:14px; background:rgba(0,0,0,0.12); margin-top:30px; }
+
+/* Responsive */
+@media (max-width:920px){
+  .about-content .about-header{ font-size:30px; }
+  .hero-tagline .tagline-text{ font-size:18px; }
+}
+@media (max-width:720px){
+  .hero{ flex-direction:column; align-items:flex-start; gap:18px; margin-top:70px; }
+  .hero-left{ flex-direction:column; align-items:flex-start; }
+  .glass-card{ width:92%; padding:20px; }
+  .about-content{ font-size:15px; }
+  .about-content .about-header{ font-size:24px; }
+  .avatar{ width:120px; height:120px; }
+  .avatar::before{ width:170px; height:170px; filter:blur(12px); }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover" id="home">
+  <img class="bg" src="bg.png" alt="background">
+
+  <!-- top menu -->
+  <div class="top-menu">
+    <a href="https://wa.me/917284063035" target="_blank">💬 WhatsApp</a>
+    <span class="divider">|</span>
+    <a href="tel:+917284063035">📞 Call</a>
+    <span class="divider">|</span>
+    <a href="mailto:sanjaykumarbgohil@gmail.com">📧 E-mail</a>
+    <span class="divider">|</span>
+    <a href="https://www.linkedin.com/in/sanjaykumarbgohil" target="_blank">🔗 LinkedIn</a>
+    <span class="divider">|</span>
+    <a href="#about" id="about-link">About Me</a>
+    <span class="divider">|</span>
+    <a href="#personal-info">Personal Info</a>
+    <span class="divider">|</span>
+    <a href="#experience">Experience</a>
+    <span class="divider">|</span>
+    <a href="#skills">Skills</a>
+    <span class="divider">|</span>
+    <a href="resume.pdf" download>⬇ Resume</a>
+  </div>
+
+  <!-- tagline just below menu -->
+  <div class="hero-tagline">
+    <span class="tagline-text">Specialist for MIS Expert • Data Analyst • PPT Master</span>
+  </div>
+
+  <!-- hero -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="avatar">
+        <img src="profile_photo.jpg" alt="Sanjaykumar B. Gohil">
+      </div>
+      <div class="profile-info">
+        <h1 class="name">Sanjaykumar B. Gohil</h1>
+        <p>Supply Chain Management</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Me in Glassmorphism -->
+<section id="about">
+  <div class="glass-card">
+    <div class="about-content"></div>
+  </div>
+</section>
+
+<footer>© 2025 Sanjaykumar B. Gohil — Professional Profile</footer>
+
+<!-- Typewriter Script (robust: header + paragraphs) -->
+<script>
+const aboutContent = document.querySelector('.about-content');
+const aboutLink = document.querySelector('#about-link');
+
+// header and body texts (header typed first)
+const headerText = "About Me";
+const bodyText = `Hello 👋 My name is Sanjaykumar Gohil, a detail-oriented professional with strong expertise in MS Excel and MIS reporting.
+I have consistently delivered accurate and insightful reports that help management in better decision-making.
+I also specialize in creating engaging PowerPoint presentations, ensuring clear and impactful communication of data and ideas.
+With my ability to analyze information, simplify complex details, and present them effectively, I contribute to improving processes and organizational efficiency.
+I believe in continuous learning and skill development, which allows me to adopt new tools and techniques, stay updated, and deliver high-quality results.
+My consistent performance and dedication have helped me achieve excellent outcomes in every responsibility I undertake.`;
+
+// helper: type text into an element, then callback
+function typeIntoElement(el, text, charDelay, callback){
+  let j = 0;
+  function step(){
+    if(j < text.length){
+      el.textContent += text.charAt(j);
+      j++;
+      setTimeout(step, charDelay);
+    } else {
+      if (typeof callback === "function") callback();
+    }
+  }
+  step();
+}
+
+// main typewriter: header then paragraphs
+function startTypewriter(){
+  aboutContent.innerHTML = ""; // clear
+  // header
+  const headerEl = document.createElement('span');
+  headerEl.className = 'about-header';
+  aboutContent.appendChild(headerEl);
+
+  typeIntoElement(headerEl, headerText, 40, () => {
+    // small pause then body
+    setTimeout(() => {
+      // split into paragraphs by double newline or sentence line breaks (we split by single newline here)
+      const lines = bodyText.split("\n");
+      // create paragraphs sequentially
+      function typeParagraph(idx){
+        if(idx >= lines.length) return;
+        const textLine = lines[idx].trim();
+        if(textLine.length === 0){
+          // skip empty
+          typeParagraph(idx + 1);
+          return;
+        }
+        const p = document.createElement('p');
+        p.className = 'about-paragraph';
+        aboutContent.appendChild(p);
+        typeIntoElement(p, textLine, 18, () => {
+          // after finishing this line, add a small pause then next
+          setTimeout(() => typeParagraph(idx + 1), 220);
+        });
+      }
+      typeParagraph(0);
+    }, 300);
+  });
+}
+
+// start on clicking About link
+aboutLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  // scroll to about section smoothly
+  document.querySelector('#about').scrollIntoView({behavior:'smooth'});
+  // start typing after small scroll delay
+  setTimeout(() => {
+    startTypewriter();
+  }, 400);
+});
+
+// optionally, you may auto-run on page load — currently not auto-running
+</script>
+
+</body>
+</html>
